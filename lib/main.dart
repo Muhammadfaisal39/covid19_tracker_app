@@ -1,3 +1,4 @@
+import 'package:covid19_tracker_app/views/search_screen.dart';
 import 'package:covid19_tracker_app/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: SplashScreen(),
+      home: SearchScreen(),
     );
   }
 }
