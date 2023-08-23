@@ -1,4 +1,5 @@
 import 'package:covid19_tracker_app/Services/world_states.dart';
+import 'package:covid19_tracker_app/views/country_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -27,15 +28,14 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             children: [
               TextFormField(
+                style: const TextStyle(color: Colors.white),
                 controller: searchController,
-                onChanged: (value){
-                  setState(() {
-
-                  });
+                onChanged: (value) {
+                  setState(() {});
                 },
                 decoration: InputDecoration(
                   hintText: "Search with country name",
-                  contentPadding: EdgeInsets.all(20),
+                  contentPadding:const EdgeInsets.all(20),
                   hintStyle: const TextStyle(color: Colors.grey),
                   iconColor: Colors.grey,
                   focusedBorder: OutlineInputBorder(
@@ -66,43 +66,82 @@ class _SearchScreenState extends State<SearchScreen> {
                         itemBuilder: (context, index) {
                           var name = snapshot.data![index]['country'];
                           if (searchController.text.isEmpty) {
-                            return ListTile(
-                              leading: Image(
-                                width: 50,
-                                height: 50,
-                                image: NetworkImage(snapshot.data![index]
-                                    ['countryInfo']['flag']),
-                              ),
-                              title: Text(
-                                snapshot.data![index]['country'],
-                                style: const TextStyle(
-                                  color: Colors.white,
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CountryScreen(
+                                          name: snapshot.data![index]
+                                          ['country'],
+                                          image: snapshot.data![index]['countryInfo']['flag'],
+                                          continent: snapshot.data![index]['continent'],
+                                          population: snapshot.data![index]['population'],
+                                          totalCases: snapshot.data![index]['cases'],
+                                          totalRecovered: snapshot.data![index]['recovered'],
+                                          totalDeaths: snapshot.data![index]['deaths'],
+                                          todayCases: snapshot.data![index]['todayCases'],
+                                          activeCases: snapshot.data![index]['active'],
+                                        )));
+                              },
+                              child: ListTile(
+                                leading: Image(
+                                  width: 50,
+                                  height: 50,
+                                  image: NetworkImage(snapshot.data![index]
+                                      ['countryInfo']['flag']),
                                 ),
-                              ),
-                              subtitle: Text(
-                                snapshot.data![index]['cases'].toString(),
-                                style: const TextStyle(color: Colors.grey),
+                                title: Text(
+                                  snapshot.data![index]['country'],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  snapshot.data![index]['cases'].toString(),
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
                               ),
                             );
                           } else if (name
                               .toLowerCase()
                               .contains(searchController.text.toLowerCase())) {
-                            return ListTile(
-                              leading: Image(
-                                width: 50,
-                                height: 50,
-                                image: NetworkImage(snapshot.data![index]
-                                    ['countryInfo']['flag']),
-                              ),
-                              title: Text(
-                                snapshot.data![index]['country'],
-                                style: const TextStyle(
-                                  color: Colors.white,
+                            return InkWell(
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CountryScreen(
+                                          name: snapshot.data![index]
+                                          ['country'],
+                                          image: snapshot.data![index]['countryInfo']['flag'],
+                                          continent: snapshot.data![index]['continent'],
+                                          population: snapshot.data![index]['population'],
+                                          totalCases: snapshot.data![index]['cases'],
+                                          totalRecovered: snapshot.data![index]['recovered'],
+                                          totalDeaths: snapshot.data![index]['deaths'],
+                                          todayCases: snapshot.data![index]['todayCases'],
+                                          activeCases: snapshot.data![index]['active'],
+                                        )));
+
+                              },
+                              child: ListTile(
+                                leading: Image(
+                                  width: 50,
+                                  height: 50,
+                                  image: NetworkImage(snapshot.data![index]
+                                      ['countryInfo']['flag']),
                                 ),
-                              ),
-                              subtitle: Text(
-                                snapshot.data![index]['cases'].toString(),
-                                style: const TextStyle(color: Colors.grey),
+                                title: Text(
+                                  snapshot.data![index]['country'],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  snapshot.data![index]['cases'].toString(),
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
                               ),
                             );
                           } else {

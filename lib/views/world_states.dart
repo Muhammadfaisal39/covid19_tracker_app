@@ -1,5 +1,5 @@
 import 'package:covid19_tracker_app/Services/world_states.dart';
-import 'package:covid19_tracker_app/views/countrystates_screen.dart';
+import 'package:covid19_tracker_app/views/search_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -102,7 +102,7 @@ class _WorldStatesState extends State<WorldStates>
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const CountryStatesScreen()));
+                                  const SearchScreen()));
                     },
                     child: Container(
                       height: 50,
